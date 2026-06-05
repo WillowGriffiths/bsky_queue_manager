@@ -1,5 +1,10 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+
+from datetime import datetime
 
 
 def index(request):
-    return HttpResponse(b"Hello!")
+    now = datetime.now()
+    f = now.strftime("%H:%M and %S seconds!")
+
+    return render(request, "bsky_queue_manager/index.html", {"time": f})
