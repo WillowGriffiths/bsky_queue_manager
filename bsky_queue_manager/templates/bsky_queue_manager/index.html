@@ -1,16 +1,30 @@
+{% load static %}
+
 <!doctype html>
 
 <html lang="en">
   <head>
     <meta charset="utf8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bluesky Queue Manager</title>
+
+    <link rel="stylesheet" href="{% static 'bsky_queue_manager/style.css' %}">
   </head>
   <body>
-    Hello {{ username }}! It's {{ time }}!
+    <nav id="navbar">
+        <div>{{ username }}</div>
+        <div>
+          <form method="post" action="/logout">
+            {% csrf_token %}
+            <button type="submit">Log Out</button>
+          </form>
+        </div>
+      </ul>
+    </nav>
 
-    <form method="post" action="/logout">
-      {% csrf_token %}
-      <button type="submit">Logout</button>
-    </form>
+    <main>
+      Hello! It's {{ time }}!
+    </main>
   </body>
 </html>
