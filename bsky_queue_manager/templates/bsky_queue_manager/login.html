@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    Hello {{ username }}! It's {{ time }}!
-
-    <form method="post" action="/logout">
-      {% csrf_token %}
-      <button type="submit">Logout</button>
+    <form action="/login" method="post">
+      {% csrf_token %} {{ form }}
+      <input type="submit" value="Submit" />
     </form>
   </body>
 </html>

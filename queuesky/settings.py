@@ -99,6 +99,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    "bsky_queue_manager.atproto.auth.ATProtoBackend",
+]
+LOGIN_URL = "/login"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
