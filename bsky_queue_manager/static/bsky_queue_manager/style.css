@@ -113,3 +113,36 @@ html {
 main {
   margin: 0.25rem 4rem;
 }
+
+#post_editor {
+  background-color: #99999988;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+}
+
+#post_editor_inner {
+  background-color: white;
+  margin: 2rem 5rem;
+  min-height: 10rem;
+  border: solid black 1px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#post_editor_input {
+  word-wrap: break-word;
+  height: 100%;
+  flex-grow: 1;
+  border: solid black 1px;
+  padding: 0.25rem;
+}
+
+.hidden {
+  display: none;
+}

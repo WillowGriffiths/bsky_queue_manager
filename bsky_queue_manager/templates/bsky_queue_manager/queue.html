@@ -1,0 +1,27 @@
+<h2>Your Queue</h2>
+
+<button id="add_post">Add Post</button>
+
+<div id="post_editor" class="hidden">
+  <div id="post_editor_inner">
+    <div id="post_editor_input" contenteditable="plaintext-only"></div>
+    <button id="post_editor_submit">Post</button>
+  </div>
+</div>
+
+<script>
+  const add_post_button = document.getElementById("add_post");
+  const post_editor = document.getElementById("post_editor");
+  const post_editor_input = document.getElementById("post_editor_input");
+  const post_editor_submit = document.getElementById("post_editor_submit");
+
+  add_post_button.addEventListener("click", () => {
+    post_editor.classList.remove("hidden");
+  });
+
+  post_editor.addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) {
+      post_editor.classList.add("hidden");
+    }
+  });
+</script>
