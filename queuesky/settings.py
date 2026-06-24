@@ -134,4 +134,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "generated",
 ]
 
+STATIC_ROOT = BASE_DIR / "static_out"
+
 STATIC_URL = "static/"
