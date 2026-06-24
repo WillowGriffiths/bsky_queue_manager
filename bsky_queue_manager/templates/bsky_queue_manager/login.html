@@ -1,9 +1,13 @@
+{% load static %}
+
 <!doctype html>
 
 <html lang="en">
   <head>
     <meta charset="utf8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="{% static 'bsky_queue_manager/style.css' %}">
   </head>
   <body>
     <form action="/login" method="post">

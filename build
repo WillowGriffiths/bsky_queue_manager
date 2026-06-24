@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+python manage.py migrate
+pnpm exec tailwindcss \
+    -i ./bsky_queue_manager/style.css \
+    -o generated/bsky_queue_manager/style.css

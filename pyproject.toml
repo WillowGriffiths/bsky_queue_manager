@@ -24,4 +24,4 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.vercel.scripts]
-build = "python manage.py migrate"
+build = "./build"
