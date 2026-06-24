@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "bsky_queue_manager",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [

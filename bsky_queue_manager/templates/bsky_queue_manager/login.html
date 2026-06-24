@@ -1,18 +1,30 @@
 {% load static %}
+{% load widget_tweaks %}
 
 <!doctype html>
 
-<html lang="en">
+<html class="h-full font-serif text-neutral-700 bg-fixed" lang="en">
   <head>
     <meta charset="utf8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="{% static 'bsky_queue_manager/style.css' %}">
   </head>
-  <body>
-    <form action="/login" method="post">
-      {% csrf_token %} {{ form }}
-      <input type="submit" value="Submit" />
+  <body class="bg-linear-to-b from-blue-300 to-blue-400 h-full p-2">
+      <form action="/login" method="post" class="grid grid-cols-1 max-w-96 gap-2 bg-white p-4 rounded-xl mx-auto [&>input]:border-2 [&>input]:border-gray-200 [&>input]:focus:border-black [&>input]:focus:ring-0 [&>input]:rounded-sm">
+      {% csrf_token %}
+
+      <h1 class="text-lg">Log in to Queuesky</h1>
+
+      {% for error in form.handle.errors %}
+      <span class="form-input border-2 border-red-400 bg-red-100 rounded-sm">
+          {{ error }}
+      </span>
+      {% endfor %}
+
+      {{ form.handle.label_tag }}
+      {{ form.handle }}
+      <input type="submit" value="Submit" class="form-input" />
     </form>
   </body>
 </html>

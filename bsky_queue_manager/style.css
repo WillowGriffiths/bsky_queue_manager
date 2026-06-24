@@ -2,13 +2,6 @@
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
 
-body,
-html {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-
 #navbar {
   display: flex;
   flex-direction: row;
