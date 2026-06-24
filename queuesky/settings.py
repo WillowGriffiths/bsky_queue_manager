@@ -24,7 +24,7 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "n") == "y"
 
-ALLOWED_HOSTS = [".vercel.app"]
+ALLOWED_HOSTS = ["127.0.0.1", ".vercel.app"]
 
 # Application definition
 

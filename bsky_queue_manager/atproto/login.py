@@ -2,11 +2,12 @@ import base64
 import hashlib
 import secrets
 from urllib.parse import urlencode, urlparse
+import os
 
 import requests
 from atproto import IdResolver
 from django.contrib.auth import authenticate, login
-from django.http import HttpRequest, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 
 from bsky_queue_manager.forms import LoginForm
@@ -31,18 +32,26 @@ def _pkce_pair() -> tuple[str, str]:
 
 
 def _get_redirect_uri() -> str:
-    return "http://127.0.0.1:8000/oauth_callback"
+    if os.environ.get("VERCEL_URL"):
+        external_url = f"https://{os.environ['VERCEL_URL']}"
+    else:
+        external_url = "http://127.0.0.1:8000"
+
+    return f"{external_url}/oauth_callback"
 
 
 def _get_client_id() -> str:
-    redirect_uri = _get_redirect_uri()
+    if os.environ.get("VERCEL_URL"):
+        client_id = f"https://{os.environ['VERCEL_URL']}/client-metadata.json"
+    else:
+        redirect_uri = _get_redirect_uri()
 
-    id_params = {
-        "redirect_uri": redirect_uri,
-    }
-    id_query_string = urlencode(id_params)
+        id_params = {
+            "redirect_uri": redirect_uri,
+        }
+        id_query_string = urlencode(id_params)
 
-    client_id = f"http://localhost?{id_query_string}"
+        client_id = f"http://localhost?{id_query_string}"
 
     return client_id
 
@@ -138,6 +147,25 @@ def _init(request: HttpRequest, handle: str) -> str | HttpResponseRedirect:
     request.session[f"next_{state}"] = next
 
     return HttpResponseRedirect(redirect_url)
+
+
+def client_metadata_view(request: HttpRequest):
+    client_id = _get_client_id()
+    redirect_uri = _get_redirect_uri()
+
+    metadata = {
+        "client_id": client_id,
+        "client_name": "Queuesky",
+        "redirect_uris": [redirect_uri],
+        "scope": "atproto",
+        "grant_types": ["authorization_code", "refresh_token"],
+        "response_types": ["code"],
+        "token_endpoint_auth_method": "none",
+        "application_type": "web",
+        "dpop_bound_access_tokens": True,
+    }
+
+    return JsonResponse(metadata)
 
 
 def login_view(request: HttpRequest):
