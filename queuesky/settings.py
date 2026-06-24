@@ -112,6 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = [
     "bsky_queue_manager.atproto.auth.ATProtoBackend",
+    "django.contrib.auth.backends.ModelBackend",
 ]
 LOGIN_URL = "/login"
 
