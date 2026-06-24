@@ -32,18 +32,16 @@ def _pkce_pair() -> tuple[str, str]:
 
 
 def _get_redirect_uri() -> str:
-    if os.environ.get("VERCEL_URL"):
-        external_url = f"https://{os.environ['VERCEL_URL']}"
-    else:
+    if os.environ.get("DJANGO_DEBUG", "n") == "y":
         external_url = "http://127.0.0.1:8000"
+    else:
+        external_url = "https://queuesky.vercel.app"
 
     return f"{external_url}/oauth_callback"
 
 
 def _get_client_id() -> str:
-    if os.environ.get("VERCEL_URL"):
-        client_id = f"https://{os.environ['VERCEL_URL']}/client-metadata.json"
-    else:
+    if os.environ.get("DJANGO_DEBUG", "n") == "y":
         redirect_uri = _get_redirect_uri()
 
         id_params = {
@@ -53,6 +51,8 @@ def _get_client_id() -> str:
 
         client_id = f"http://localhost?{id_query_string}"
 
+    else:
+        client_id = "https://queuesky.vercel.app/client-metadata.json"
     return client_id
 
 
