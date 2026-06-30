@@ -121,6 +121,7 @@ def _init(request: HttpRequest, handle: str) -> str | HttpResponseRedirect:
         "state": state,
         "redirect_uri": redirect_uri,
         "scope": "atproto",
+        "login_hint": handle,
     }
 
     response = requests.post(f"{oauth_server_url}/oauth/par", data=form_data)
